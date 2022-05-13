@@ -17,9 +17,6 @@ app.use(express())
 app.get('/', (req, res) => {
     res.send('welcome to heroku')
 })
-app.get('/about', (req, res) => {
-    res.send('welcome to about page of this server')
-})
 
 
 app.listen(port, () => {
