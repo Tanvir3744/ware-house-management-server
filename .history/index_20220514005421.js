@@ -22,8 +22,8 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 async function run() {
     try {
         await client.connect();
-        const database = client.db('Bikeware');
-        const bikesCollection = database.collection('bikes');
+        const database = client.db('Bikeware')
+        const bikesCollection = database.collection('bikes')
 
         //getting all the items which is saved in database
         app.get('/items', async (req, res) => {

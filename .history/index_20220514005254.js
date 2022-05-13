@@ -17,13 +17,13 @@ app.use(express())
 
 
 const uri = `mongodb+srv://${ process.env.DATABASE_USERNAME }:${ process.env.DATABASE_PASSWORD }@cluster0.3ypql.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
-
+console.log(uri)
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 async function run() {
     try {
         await client.connect();
-        const database = client.db('Bikeware');
-        const bikesCollection = database.collection('bikes');
+        const database = client.db('Bikeware')
+        const bikesCollection = database.collection('bikes')
 
         //getting all the items which is saved in database
         app.get('/items', async (req, res) => {
@@ -48,6 +48,9 @@ run().catch(console.dir)
 
 app.get('/', (req, res) => {
     res.send('welcome to heroku')
+})
+app.get('/about', (req, res) => {
+    res.send('welcome to about page of this server')
 })
 
 
