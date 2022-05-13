@@ -20,16 +20,7 @@ const uri = "mongodb+srv://Inventory-management:<password>@cluster0.3ypql.mongod
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 async function run() {
     try {
-        await client.connect();
-        const database = client.db('bikeware')
-        const bikesCollection = database.collection('bikes')
 
-        app.get('/items', async (req, res) => {
-            const query = {};
-            const cursor = bikesCollection.find(query);
-            const result = cursor.toArray();
-            res.send(result);
-        })
     }
     finally {
 

@@ -18,24 +18,12 @@ app.use(express())
 
 const uri = "mongodb+srv://Inventory-management:<password>@cluster0.3ypql.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-async function run() {
-    try {
-        await client.connect();
-        const database = client.db('bikeware')
-        const bikesCollection = database.collection('bikes')
-
-        app.get('/items', async (req, res) => {
-            const query = {};
-            const cursor = bikesCollection.find(query);
-            const result = cursor.toArray();
-            res.send(result);
-        })
-    }
-    finally {
-
-    }
-}
-run().catch(console.dir)
+client.connect(err => {
+    const collection = client.db("test").collection("devices");
+    console.log('database connected with server')
+    // perform actions on the collection object
+    client.close();
+});
 
 app.get('/', (req, res) => {
     res.send('welcome to heroku')
