@@ -26,7 +26,7 @@ async function run() {
         const bikesCollection = database.collection('bikes');
 
         //getting all the items which is saved in database
-        app.get('/products', async (req, res) => {
+        app.get('/product', async (req, res) => {
             const query = {};
             const cursor = bikesCollection.find(query);
             const result = cursor.toArray();
