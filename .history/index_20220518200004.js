@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors')
 const app = express();
-const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+const { MongoClient, ServerApiVersion } = require('mongodb');
 
 require('dotenv').config()
 const port = process.env.PORT || 5000;
@@ -22,7 +22,8 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 async function run() {
     try {
         await client.connect();
-        const bikesCollection = client.db('Bikeware').collection('bikes');
+        const database = client.db('Bikeware');
+        const bikesCollection = database.collection('bikes');
 
         //demo home page
         app.get('/', (req, res) => {
@@ -30,14 +31,12 @@ async function run() {
         })
 
         //getting all the items which is saved in database
-        app.get('/allItems', async (req, res) => {
+        app.get('/products', async (req, res) => {
             const query = {};
             const cursor = bikesCollection.find(query);
-            const result = await cursor.toArray();
+            const result = cursor.toArray();
             res.send(result);
         })
-
-        //
 
         //posting data from client side to server side
 
@@ -50,7 +49,7 @@ async function run() {
 
     }
 }
-run().catch(console.log)
+run().catch(console.dir)
 
 
 

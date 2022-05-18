@@ -33,7 +33,7 @@ async function run() {
         app.get('/allItems', async (req, res) => {
             const query = {};
             const cursor = bikesCollection.find(query);
-            const result = await cursor.toArray();
+            const result = cursor.toArray();
             res.send(result);
         })
 
