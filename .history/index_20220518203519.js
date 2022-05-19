@@ -24,6 +24,10 @@ async function run() {
         await client.connect();
         const bikesCollection = client.db('Bikeware').collection('bikes');
 
+        //demo home page
+        app.get('/', (req, res) => {
+            res.send('welcome to heroku')
+        })
 
         //getting all the items which is saved in database
         app.get('/allItems', async (req, res) => {
@@ -33,24 +37,9 @@ async function run() {
             res.send(result);
         })
 
-        //limited items for home page
-        app.get('/items', async (req, res) => {
-            const query = {};
-            const cursor = bikesCollection.find(query).limit(6);
-            const result = await cursor.toArray();
-            res.send(result)
-        })
-
-        //showing detail api
-        app.get('/item/:id', async (req, res) => {
-            const id = req.params.id;
-            const query = { _id: ObjectId(id) }
-            const result = await bikesCollection.findOne(query);
-            res.send(result);
-        })
+        //
 
         //posting data from client side to server side
-
 
         //deleting data from client side and also database
 
@@ -64,10 +53,6 @@ async function run() {
 run().catch(console.log)
 
 
-//demo home page
-app.get('/', (req, res) => {
-    res.send('welcome to heroku')
-})
 
 
 app.listen(port, () => {

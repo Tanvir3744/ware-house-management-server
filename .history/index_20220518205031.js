@@ -34,23 +34,16 @@ async function run() {
         })
 
         //limited items for home page
-        app.get('/items', async (req, res) => {
+        app.get('items', async (req, res) => {
             const query = {};
-            const cursor = bikesCollection.find(query).limit(6);
-            const result = await cursor.toArray();
+            const cursor = bikesCollection.find(query);
+            const result = await cursor.limit(6).toArray();
             res.send(result)
         })
 
-        //showing detail api
-        app.get('/item/:id', async (req, res) => {
-            const id = req.params.id;
-            const query = { _id: ObjectId(id) }
-            const result = await bikesCollection.findOne(query);
-            res.send(result);
-        })
+        //
 
         //posting data from client side to server side
-
 
         //deleting data from client side and also database
 
