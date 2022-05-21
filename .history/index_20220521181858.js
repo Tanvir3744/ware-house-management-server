@@ -60,8 +60,9 @@ async function run() {
             const filter = { _id: ObjectId(id) };
             const option = { upsert: true }
             const updatedDoc = {
-                $set:quantity
-                
+                $set: {
+                    quantity: quantity
+                }
             }
             const result = await bikesCollection.updateOne(filter, updatedDoc, option);
             res.send(result);
@@ -69,7 +70,7 @@ async function run() {
 
 
         //posting data from client side to server side
-        app.post('/allItems', async (req, res) => {
+        app.post('/items', async (req, res) => {
             const newItem = req.body;
             const result = await bikesCollection.insertOne(newItem);
             res.send(result);

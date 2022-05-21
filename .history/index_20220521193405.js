@@ -69,7 +69,7 @@ async function run() {
 
 
         //posting data from client side to server side
-        app.post('/allItems', async (req, res) => {
+        app.post('/items', async (req, res) => {
             const newItem = req.body;
             const result = await bikesCollection.insertOne(newItem);
             res.send(result);

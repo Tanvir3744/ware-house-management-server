@@ -56,20 +56,24 @@ async function run() {
         //updating the quantity of the product
         app.put('/item/:id', async (req, res) => {
             const id = req.params.id;
+            console.log(id)
             const quantity = req.body;
+            console.log('update quantity', quantity)
             const filter = { _id: ObjectId(id) };
-            const option = { upsert: true }
-            const updatedDoc = {
-                $set:quantity
-                
-            }
-            const result = await bikesCollection.updateOne(filter, updatedDoc, option);
-            res.send(result);
+            console.log(filter)
+            /* const option = { upsert: true }
+           const updatedDoc = {
+               $set: {
+                   quantity: quantity
+               }
+           }
+           const result = await bikesCollection.updateOne(filter, updatedDoc, option); 
+           res.send(result);*/
         })
 
 
         //posting data from client side to server side
-        app.post('/allItems', async (req, res) => {
+        app.post('/items', async (req, res) => {
             const newItem = req.body;
             const result = await bikesCollection.insertOne(newItem);
             res.send(result);

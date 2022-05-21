@@ -1,6 +1,4 @@
 const express = require('express');
-var bodyParser = require('body-parser');
-
 const cors = require('cors')
 const app = express();
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
@@ -10,9 +8,7 @@ const port = process.env.PORT || 5000;
 
 //using middle ware 
 app.use(cors());
-app.use(express.json())
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+app.use(express())
 
 
 
@@ -56,12 +52,13 @@ async function run() {
         //updating the quantity of the product
         app.put('/item/:id', async (req, res) => {
             const id = req.params.id;
-            const quantity = req.body;
+            const updateQuantity = req.body;
             const filter = { _id: ObjectId(id) };
             const option = { upsert: true }
             const updatedDoc = {
-                $set:quantity
-                
+                $set: {
+                    quantity: updateQuantity.quantity
+                }
             }
             const result = await bikesCollection.updateOne(filter, updatedDoc, option);
             res.send(result);
@@ -69,7 +66,7 @@ async function run() {
 
 
         //posting data from client side to server side
-        app.post('/allItems', async (req, res) => {
+        app.post('/items', async (req, res) => {
             const newItem = req.body;
             const result = await bikesCollection.insertOne(newItem);
             res.send(result);
@@ -84,7 +81,7 @@ async function run() {
 
     }
 }
-run().catch(console.dir)
+run().catch(console.log)
 
 
 //demo home page
