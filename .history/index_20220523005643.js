@@ -84,7 +84,7 @@ async function run() {
         })
 
         //updating data from client side to server side
-         app.put('/myItem/:id', async (req, res) => {
+         app.put('/myItems/:id', async (req, res) => {
             const id = req.params.id;
             const updateItem = req.body;
             const filter = { _id: ObjectId(id) };
@@ -106,13 +106,6 @@ async function run() {
             const cursor = bikesCollection.find(query)
             const result = await cursor.toArray();
             res.send(result)
-        })
-
-        app.get('/myItem/:id', async (req, res) => {
-            const id = req.params.id;
-            const query = { _id: ObjectId(id) }
-            const myitem = await bikesCollection.findOne(query);
-            res.send(myitem)
         })
     }
     finally {
