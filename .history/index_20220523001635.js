@@ -95,15 +95,10 @@ async function run() {
                 }
             }
         }) */
-
         /* getting my item which is based on user  */
         app.get('/myItem', async (req, res) => {
-            const usersEmail = req.body.email;
+            const usersEmail = req.body;
             console.log(usersEmail)
-            const query = { usersEmail };
-            const cursor = bikesCollection.find(query)
-            const result = await cursor.toArray();
-            res.send(result)
         })
     }
     finally {

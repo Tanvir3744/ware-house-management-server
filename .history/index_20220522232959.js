@@ -84,27 +84,11 @@ async function run() {
         })
 
         //updating data from client side to server side
-       /*  app.put('/myItems/:id', async (req, res) => {
+        app.put('/myItems/:id', async (req, res) => {
             const id = req.params.id;
-            const updateItem = req.body;
-            const filter = { _id: ObjectId(id) };
-            const option = { upsert: true };
-            const updateDoc = {
-                $set: {
-                    updateItem,
-                }
-            }
-        }) */
-
-        /* getting my item which is based on user  */
-        app.get('/myItem', async (req, res) => {
-            const usersEmail = req.body.email;
-            console.log(usersEmail)
-            const query = { usersEmail };
-            const cursor = bikesCollection.find(query)
-            const result = await cursor.toArray();
-            res.send(result)
+            console.log(id)
         })
+        
     }
     finally {
 
