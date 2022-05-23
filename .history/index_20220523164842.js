@@ -88,17 +88,13 @@ async function run() {
             const id = req.params.id;
             const updateItem = req.body;
             const filter = { _id: ObjectId(id) };
+            const option = { upsert: true };
             const updateDoc = {
                 $set: {
-                    name: updateItem.name,
-                    price: updateItem.price,
-                    img: updateItem.img,
-                    shortDesc: updateItem.shortDesc,
-                    quantity: updateItem.quantity,
-                    supplier : updateItem.supplier
+                    updateItem : updateItem,
                 }
              }
-             const result = await bikesCollection.updateOne(filter,  updateDoc);
+             const result = await bikesCollection.updateOne(filter, option, updateDoc);
              res.send(result);
         }) 
 
